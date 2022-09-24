@@ -8,41 +8,52 @@ using Services;
 /// </summary>
 public class Service : IService
 {
-	/// <summary>
-	/// Access lock.
-	/// </summary>
-	private readonly Object accessLock = new Object();
+    /// <summary>
+    /// Access lock.
+    /// </summary>
+    private readonly Object accessLock = new Object();
 
-	/// <summary>
-	/// Service logic implementation.
-	/// </summary>
-	private ServiceLogic logic = new ServiceLogic();
+    /// <summary>
+    /// Service logic implementation.
+    /// </summary>
+    private ServiceLogic logic = new ServiceLogic();
 
+    /// <summary>
+    /// Add to capacity
+    /// </summary>
+    /// <param name="amount">Amount to add</param>
+    /// <returns>New capacity</returns>
+    public int AddLiquid()
+    {
+        lock (accessLock)
+        {
+            return logic.AddLiquid();
+        }
+    }
 
-	/// <summary>
-	/// Add given numbers.
-	/// </summary>
-	/// <param name="left">Left number.</param>
-	/// <param name="right">Right number.</param>
-	/// <returns>left + right</returns>
-	public int AddLiteral(int left, int right)
-	{
-		lock( accessLock )
-		{
-			return logic.AddLiteral(left, right);
-		}
-	}
+    /// <summary>
+    /// Remove from capacity
+    /// </summary>
+    /// <param name="amount">Amount to remove</param>
+    /// <returns>New capacity</returns>
+    public int SubtractLiquid()
+    {
+        lock (accessLock)
+        {
+            return logic.SubtractLiquid();
+        }
+    }
 
-	/// <summary>
-	/// Add given numbers.
-	/// </summary>
-	/// <param name="leftAndRight">Numbers to add.</param>
-	/// <returns>Left + Right in Sum</returns>
-	public ByValStruct AddStruct(ByValStruct leftAndRight)
-	{
-		lock( accessLock )
-		{
-			return logic.AddStruct(leftAndRight);
-		}
-	}
+    /// <summary>
+    /// Get bounds
+    /// </summary>
+    /// <param name="structure">Structure to fill.</param>
+    /// <returns>Structure with bounds.</returns>
+    public ByValStruct GetBounds(ByValStruct structure)
+    {
+        lock (accessLock)
+        {
+            return logic.GetBounds(structure);
+        }
+    }
 }

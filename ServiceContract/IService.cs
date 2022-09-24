@@ -6,21 +6,36 @@
 /// </summary>
 public class ByValStruct
 {
-	/// <summary>
-	/// Left number.
-	/// </summary>
-	public int Left{ get; set; }
+    /// <summary>
+    /// Left number.
+    /// </summary>
+    public int Left { get; set; }
 
-	/// <summary>
-	/// Right number.
-	/// </summary>
-	/// <value></value>
-	public int Right{ get; set; }
+    /// <summary>
+    /// Right number.
+    /// </summary>
+    /// <value></value>
+    public int Right { get; set; }
 
-	/// <summary>
-	/// Left + Right
-	/// </summary>
-	public int Sum{ get; set; }
+    /// <summary>
+    /// Left + Right
+    /// </summary>
+    public int Sum { get; set; }
+
+    /// <summary>
+    /// Capacity
+    /// </summary>
+    public int Capacity { get; set; }
+
+    /// <summary>
+    /// Upper bound
+    /// </summary>
+    public int UpperBound { get; set; }
+
+    /// <summary>
+    /// Lower bound
+    /// </summary>
+    public int LowerBound { get; set; }
 }
 
 /// <summary>
@@ -28,18 +43,24 @@ public class ByValStruct
 /// </summary>
 public interface IService
 {
-	/// <summary>
-	/// Add given numbers.
-	/// </summary>
-	/// <param name="left">Left number.</param>
-	/// <param name="right">Right number.</param>
-	/// <returns>left + right</returns>
-	int AddLiteral(int left, int right);
+    /// <summary>
+    /// Remove liquid from the capacity
+    /// </summary>
+    /// <param name="amount">Liquid to remove.</param>
+    /// <returns>New capacity</returns>
+    int SubtractLiquid();
 
-	/// <summary>
-	/// Add given numbers.
-	/// </summary>
-	/// <param name="leftAndRight">Numbers to add.</param>
-	/// <returns>Left + Right in Sum</returns>
-	ByValStruct AddStruct(ByValStruct leftAndRight);
+    /// <summary>
+    /// Add liquid to the capacity
+    /// </summary>
+    /// <param name="amount">Liquid to add.</param>
+    /// <returns>New capacity</returns>
+	int AddLiquid();
+
+    /// <summary>
+    /// Get bounds
+    /// </summary>
+    /// <param name="structure">Structure to fill.</param>
+    /// <returns>Structure with bounds.</returns>
+    ByValStruct GetBounds(ByValStruct structure);
 }

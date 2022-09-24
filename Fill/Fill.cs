@@ -11,9 +11,9 @@ using NLog;
 using Services;
 
 /// <summary>
-/// Client example.
+/// Fill example.
 /// </summary>
-class Client
+class Fill
 {
     /// <summary>
     /// Logger for this class.
@@ -72,23 +72,29 @@ class Client
 
                 //use service
                 var rnd = new Random();
+
                 while (true)
                 {
-                    var structure = new ByValStruct();
-                    var filledStructure = service.GetBounds(structure);
-                    log.Info($"Upper bound - {filledStructure.UpperBound}\nLower bound - {filledStructure.LowerBound}");
-                    var newCapacity = service.SubtractLiquid();
+                    var left = rnd.Next(-100, 100);
+                    var right = rnd.Next(-100, 100);
+                    var leftAndRight = new ByValStruct() { Left = left, Right = right };
 
                     Thread.Sleep(2000);
 
-                    if (newCapacity == 0)
-                    {
-                        log.Info("I did not need to do my job");
-                    }
-                    else
-                    {
-                        log.Info($"I did my job, new capacity is {newCapacity}");
-                    }
+                    //test passing structures by value
+                    log.Info(
+                        $"Before 'ByValStruct Add(ByValStruct)': leftAndRight=ByValStruct" +
+                        $"(Left={leftAndRight.Left}, Right={leftAndRight.Right}, Sum={leftAndRight.Sum})"
+                    );
+                    var result = service.AddStruct(leftAndRight);
+                    log.Info(
+                        $"After 'ByValStruct Add(ByValStruct)': leftAndRight=ByValStruct" +
+                        $"(Left={leftAndRight.Left}, Right={leftAndRight.Right}, Sum={leftAndRight.Sum})"
+                    );
+                    log.Info(
+                        $"After 'ByValStruct Add(ByValStruct)': result=ByValStruct" +
+                        $"(Left={result.Left}, Right={result.Right}, Sum={result.Sum})"
+                    );
                     log.Info("---");
 
                     Thread.Sleep(2000);
@@ -111,7 +117,7 @@ class Client
     /// <param name="args">Command line arguments.</param>
     static void Main(string[] args)
     {
-        var self = new Client();
+        var self = new Fill();
         self.Run();
     }
 }

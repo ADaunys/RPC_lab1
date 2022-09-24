@@ -4,38 +4,46 @@ using NLog;
 
 using Services;
 
-
 /// <summary>
 /// Service logic.
 /// </summary>
 class ServiceLogic : IService
 {
-	/// <summary>
-	/// Logger for this class.
-	/// </summary>
-	private Logger log = LogManager.GetCurrentClassLogger();
+    /// <summary>
+    /// Logger for this class.
+    /// </summary>
+    private Logger log = LogManager.GetCurrentClassLogger();
 
-	/// <summary>
-	/// Add given numbers.
-	/// </summary>
-	/// <param name="left">Left number.</param>
-	/// <param name="right">Right number.</param>
-	/// <returns>left + right</returns>
-	public int AddLiteral(int left, int right)
-	{
-		log.Info($"AddLiteral({left}, {right})");
-		return left + right;
-	}
-
-	/// <summary>
-	/// Add given numbers.
-	/// </summary>
-	/// <param name="leftAndRight">Numbers to add.</param>
-	/// <returns>Left + Right in Sum</returns>
-	public ByValStruct AddStruct(ByValStruct leftAndRight)
-	{
-		log.Info($"AddStruct(ByValStruct(Left={leftAndRight.Left}, Right={leftAndRight.Right}))");
-		leftAndRight.Sum = leftAndRight.Left + leftAndRight.Right;
-		return leftAndRight;
-	}
+    /// <summary>
+    /// Add given numbers.
+    /// </summary>
+    /// <param name="leftAndRight">Numbers to add.</param>
+    /// <returns>New capacity</returns>
+    public int SubtractLiquid()
+    {
+        if (Server.capacity > Server.upperBound)
+        {
+            log.Info($"Before sucky sucky, capacity is {Server.capacity}");
+            Server.capacity = Server.upperBound;
+            log.Info($"After sucky sucky, capacity is {Server.capacity}");
+            return Server.capacity;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    public int AddLiquid()
+    {
+        return 0;
+    }
+    public ByValStruct GetBounds(ByValStruct structure)
+    {
+        var rnd = new Random();
+        log.Info($"GetBounds()");
+        structure.Capacity = Server.capacity;
+        structure.UpperBound = Server.upperBound;
+        structure.LowerBound = Server.lowerBound;
+        return structure;
+    }
 }

@@ -10,89 +10,101 @@ using SimpleRpc.Serialization.Hyperion;
 
 using Services;
 
-
 public class Server
 {
-	/// <summary>
-	/// Logger for this class.
-	/// </summary>
-	Logger log = LogManager.GetCurrentClassLogger();
+    public static int capacity = new Random().Next(0, 100);
+    public static int lowerBound = 0;
+    public static int upperBound = 0;
+    /// <summary>
+    /// Logger for this class.
+    /// </summary>
+    Logger log = LogManager.GetCurrentClassLogger();
 
-	/// <summary>
-	/// Configure loggin subsystem.
-	/// </summary>
-	private void ConfigureLogging()
-	{
-		var config = new NLog.Config.LoggingConfiguration();
+    /// <summary>
+    /// Configure loggin subsystem.
+    /// </summary>
+    private void ConfigureLogging()
+    {
+        var config = new NLog.Config.LoggingConfiguration();
 
-		var console =
-			new NLog.Targets.ConsoleTarget("console")
-			{
-				Layout = @"${date:format=HH\:mm\:ss}|${level}| ${message} ${exception}"
-			};
-		config.AddTarget(console);
-		config.AddRuleForAllLevels(console);
+        var console =
+            new NLog.Targets.ConsoleTarget("console")
+            {
+                Layout = @"${date:format=HH\:mm\:ss}|${level}| ${message} ${exception}"
+            };
+        config.AddTarget(console);
+        config.AddRuleForAllLevels(console);
 
-		LogManager.Configuration = config;
-	}
+        LogManager.Configuration = config;
+    }
 
-	/// <summary>
-	/// Program entry point.
-	/// </summary>
-	/// <param name="args">Command line arguments.</param>
-	public static void Main(string[] args)
-	{
-		var self = new Server();
-		self.Run(args);
-	}
+    /// <summary>
+    /// Program entry point.
+    /// </summary>
+    /// <param name="args">Command line arguments.</param>
+    public static void Main(string[] args)
+    {
+        var self = new Server();
+        self.Run(args);
+    }
 
-	/// <summary>
-	/// Program body.
-	/// </summary>
-	/// <param name="args">Command line arguments.</param>
-	private void Run(string[] args) 
-	{
-		//configure logging
-		ConfigureLogging();
+    /// <summary>
+    /// Program body.
+    /// </summary>
+    /// <param name="args">Command line arguments.</param>
+    private void Run(string[] args)
+    {
+        //configure logging
+        ConfigureLogging();
 
-		//indicate server is about to start
-		log.Info("Server is about to start");
+        //indicate server is about to start
+        log.Info("Server is about to start");
 
-		//start the server
-		StartServer(args);
-	}
+        //start the server
+        StartServer(args);
 
-	/// <summary>
-	/// Starts integrated server.
-	/// </summary>
-	/// <param name="args">Command line arguments.</param>
-	private void StartServer(string[] args)
-	{
-		///create web app builder
-		var builder = WebApplication.CreateBuilder(args);
+        // while loop that does something every 2 seconds
+        while (true)
+        {
+            Thread.Sleep(2000);
+            lowerBound = new Random().Next(0, 50);
+            upperBound = new Random().Next(lowerBound, 100);
+            log.Info("Bounds changed to: " + lowerBound + " " + upperBound);
+        }
+    }
 
-		//configure integrated server
-		builder.WebHost.ConfigureKestrel(opts => {
-			opts.Listen(IPAddress.Loopback, 5000);
-		});
+    /// <summary>
+    /// Starts integrated server.
+    /// </summary>
+    /// <param name="args">Command line arguments.</param>
+    private void StartServer(string[] args)
+    {
+        ///create web app builder
+        var builder = WebApplication.CreateBuilder(args);
 
-		//add SimpleRPC services
-		builder.Services
-			.AddSimpleRpcServer(new HttpServerTransportOptions { Path = "/simplerpc" })
-			.AddSimpleRpcHyperionSerializer();
+        //configure integrated server
+        builder.WebHost.ConfigureKestrel(opts =>
+        {
+            opts.Listen(IPAddress.Loopback, 5000);
+        });
 
-		//add our custom services
-		builder.Services
-			.AddSingleton<IService, Service>();
+        //add SimpleRPC services
+        builder.Services
+            .AddSimpleRpcServer(new HttpServerTransportOptions { Path = "/simplerpc" })
+            .AddSimpleRpcHyperionSerializer();
 
-		//build the server
-		var app = builder.Build();
+        //add our custom services
+        builder.Services
+            .AddSingleton<IService, Service>();
 
-		//add SimpleRPC middleware
-		app.UseSimpleRpcServer();
+        //build the server
+        var app = builder.Build();
 
-		//run the server
-		app.Run();
-		// app.RunAsync(); //use this if you need to implement background processing in the main thread
-	}
+        //add SimpleRPC middleware
+        app.UseSimpleRpcServer();
+
+        //run the server
+        //app.Run();
+        app.RunAsync(); //use this if you need to implement background processing in the main thread
+    }
 }

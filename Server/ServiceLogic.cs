@@ -37,7 +37,7 @@ class ServiceLogic : IService
     {
         return 0;
     }
-    public ByValStruct GetBounds(ByValStruct structure)
+    public WaterContainer GetBounds(WaterContainer structure)
     {
         var rnd = new Random();
         log.Info($"GetBounds()");

@@ -49,7 +49,7 @@ public class Service : IService
     /// </summary>
     /// <param name="structure">Structure to fill.</param>
     /// <returns>Structure with bounds.</returns>
-    public ByValStruct GetBounds(ByValStruct structure)
+    public WaterContainer GetBounds(WaterContainer structure)
     {
         lock (accessLock)
         {

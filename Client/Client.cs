@@ -74,7 +74,7 @@ class Client
                 var rnd = new Random();
                 while (true)
                 {
-                    var structure = new ByValStruct();
+                    var structure = new WaterContainer();
                     var filledStructure = service.GetBounds(structure);
                     log.Info($"Upper bound - {filledStructure.UpperBound}\nLower bound - {filledStructure.LowerBound}");
                     var newCapacity = service.SubtractLiquid();

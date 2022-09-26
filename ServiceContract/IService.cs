@@ -4,7 +4,7 @@
 /// <summary>
 /// Structure for testing pass-by-value calls.
 /// </summary>
-public class ByValStruct
+public class WaterContainer
 {
     /// <summary>
     /// Left number.
@@ -62,5 +62,5 @@ public interface IService
     /// </summary>
     /// <param name="structure">Structure to fill.</param>
     /// <returns>Structure with bounds.</returns>
-    ByValStruct GetBounds(ByValStruct structure);
+    WaterContainer GetBounds(WaterContainer structure);
 }

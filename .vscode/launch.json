@@ -16,13 +16,13 @@
       "stopAtEntry": false
     },
     {
-      "name": "Client",
+      "name": "Pump",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build-Client",
-      "program": "${workspaceFolder}/Client/bin/Debug/net6.0/Client.dll",
+      "preLaunchTask": "build-Pump",
+      "program": "${workspaceFolder}/Pump/bin/Debug/net6.0/Pump.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Client",
+      "cwd": "${workspaceFolder}/Pump",
       "console": "externalTerminal",
       "stopAtEntry": false
     },

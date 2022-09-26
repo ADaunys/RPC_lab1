@@ -16,12 +16,12 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "build-Client",
+      "label": "build-Pump",
       "command": "dotnet",
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/Client/Client.csproj",
+        "${workspaceFolder}/Pump/Pump.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],

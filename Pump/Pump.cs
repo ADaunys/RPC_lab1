@@ -83,11 +83,11 @@ class Client
 
                     if (newCapacity == 0)
                     {
-                        log.Info("I did not need to do my job");
+                        log.Info("I did not need to pump out the liquid");
                     }
                     else
                     {
-                        log.Info($"I did my job, new capacity is {newCapacity}");
+                        log.Info($"I pumped out the liquid, new capacity is {newCapacity}");
                     }
                     log.Info("---");
 

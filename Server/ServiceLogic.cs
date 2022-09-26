@@ -23,9 +23,9 @@ class ServiceLogic : IService
     {
         if (Server.capacity > Server.upperBound)
         {
-            log.Info($"Before sucky sucky, capacity is {Server.capacity}");
+            log.Info($"Before pumping, capacity is {Server.capacity}");
             Server.capacity = Server.upperBound;
-            log.Info($"After sucky sucky, capacity is {Server.capacity}");
+            log.Info($"After pumping, capacity is {Server.capacity}");
             return Server.capacity;
         }
         else
@@ -35,11 +35,20 @@ class ServiceLogic : IService
     }
     public int AddLiquid()
     {
-        return 0;
+        if (Server.capacity < Server.lowerBound)
+        {
+            log.Info($"Before filling, capacity is {Server.capacity}");
+            Server.capacity = Server.lowerBound;
+            log.Info($"After filling, capacity is {Server.capacity}");
+            return Server.capacity;
+        }
+        else
+        {
+            return 0;
+        }
     }
     public WaterContainer GetBounds(WaterContainer structure)
     {
-        var rnd = new Random();
         log.Info($"GetBounds()");
         structure.Capacity = Server.capacity;
         structure.UpperBound = Server.upperBound;

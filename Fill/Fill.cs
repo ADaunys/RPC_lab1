@@ -75,12 +75,20 @@ class Fill
 
                 while (true)
                 {
-                    var left = rnd.Next(-100, 100);
-                    var right = rnd.Next(-100, 100);
-                    var leftAndRight = new WaterContainer() { Left = left, Right = right };
-
+                    var structure = new WaterContainer();
+                    var filledStructure = service.GetBounds(structure);
+                    log.Info($"Upper bound - {filledStructure.UpperBound}\nLower bound - {filledStructure.LowerBound}");
+                    var newCapacity = service.AddLiquid();
                     Thread.Sleep(2000);
 
+                    if (newCapacity == 0)
+                    {
+                        log.Info("I did not need to fill the container");
+                    }
+                    else
+                    {
+                        log.Info($"I filled the container, new capacity is {newCapacity}");
+                    }
                     log.Info("---");
 
                     Thread.Sleep(2000);

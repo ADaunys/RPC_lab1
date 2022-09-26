@@ -79,6 +79,11 @@ class Client
                     log.Info($"Upper bound - {filledStructure.UpperBound}\nLower bound - {filledStructure.LowerBound}");
                     var newCapacity = service.SubtractLiquid();
 
+                    // paklausia ar gali nupilti
+                    // jeigu gali nupilti, tai nupila sugeneruota kieki, taciau jeigu sugeneruotas kiekis yra didesnis
+                    // tai nupila tiek kiek gali, o likusi kieki išlog'ina: 
+                    // "Sugeneruotas kiekis - 15L, užpiltas kiekis - 10L, riba viršyta - 5L"
+
                     Thread.Sleep(2000);
 
                     if (newCapacity == 0)

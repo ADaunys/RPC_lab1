@@ -19,28 +19,52 @@ public class Service : IService
     private ServiceLogic logic = new ServiceLogic();
 
     /// <summary>
-    /// Add to capacity
+    /// Check if liquid can be added to the capacity
     /// </summary>
-    /// <param name="amount">Amount to add</param>
-    /// <returns>New capacity</returns>
-    public int AddLiquid()
+    /// <returns>boolean</returns>
+    public bool CanAddLiquid()
     {
         lock (accessLock)
         {
-            return logic.AddLiquid();
+            return logic.CanAddLiquid();
         }
     }
 
     /// <summary>
-    /// Remove from capacity
+    /// Check if liquid can be subtracted from the capacity
     /// </summary>
-    /// <param name="amount">Amount to remove</param>
-    /// <returns>New capacity</returns>
-    public int SubtractLiquid()
+    /// <returns>boolean</returns>
+    public bool CanSubtractLiquid()
     {
         lock (accessLock)
         {
-            return logic.SubtractLiquid();
+            return logic.CanSubtractLiquid();
+        }
+    }
+
+    /// <summary>
+    /// Add liquid to the capacity
+    /// </summary>
+    /// <param name="amount">Amount of liquid to add</param>
+    /// <returns>Amount of liquid to be added</returns>
+    public int AddLiquid(int amount)
+    {
+        lock (accessLock)
+        {
+            return logic.AddLiquid(amount);
+        }
+    }
+
+    /// <summary>
+    /// Subtract liquid from the capacity
+    /// </summary>
+    /// <param name="amount">Amount of liquid to subtract</param>
+    /// <returns>Amount of liquid to be subtracted</returns>
+    public int SubtractLiquid(int amount)
+    {
+        lock (accessLock)
+        {
+            return logic.SubtractLiquid(amount);
         }
     }
 

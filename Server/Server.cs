@@ -66,10 +66,10 @@ public class Server
         // while loop that does something every 2 seconds
         while (true)
         {
-            Thread.Sleep(2000);
             lowerBound = new Random().Next(0, 50);
             upperBound = new Random().Next(lowerBound, 100);
             log.Info("Bounds changed to: " + lowerBound + " " + upperBound);
+            Thread.Sleep(4000);
         }
     }
 

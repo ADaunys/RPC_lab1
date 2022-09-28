@@ -44,18 +44,30 @@ public class WaterContainer
 public interface IService
 {
     /// <summary>
-    /// Remove liquid from the capacity
+    /// Check if liquid can be subtracted from the capacity
     /// </summary>
-    /// <param name="amount">Liquid to remove.</param>
-    /// <returns>New capacity</returns>
-    int SubtractLiquid();
+    /// <returns>boolean</returns>
+    bool CanSubtractLiquid();
+
+    /// <summary>
+    /// Check if liquid can be added to the capacity
+    /// </summary>
+    /// <returns>boolean</returns>
+	bool CanAddLiquid();
 
     /// <summary>
     /// Add liquid to the capacity
     /// </summary>
-    /// <param name="amount">Liquid to add.</param>
-    /// <returns>New capacity</returns>
-	int AddLiquid();
+    /// <param name="amount">Amount of liquid to add</param>
+    /// <returns>Amount of liquid to be added</returns>
+    int AddLiquid(int amount);
+
+    /// <summary>
+    /// Subtract liquid from the capacity
+    /// </summary>
+    /// <param name="amount">Amount of liquid to subtract</param>
+    /// <returns>Amount of liquid to be subtracted</returns>
+    int SubtractLiquid(int amount);
 
     /// <summary>
     /// Get bounds

@@ -77,17 +77,25 @@ class Fill
                 {
                     var structure = new WaterContainer();
                     var filledStructure = service.GetBounds(structure);
-                    log.Info($"Upper bound - {filledStructure.UpperBound}\nLower bound - {filledStructure.LowerBound}");
-                    var newCapacity = service.AddLiquid();
+                    log.Info($"Upper bound - {filledStructure.UpperBound}");
+                    log.Info($"Lower bound - {filledStructure.LowerBound}");
+                    var canAdd = service.CanAddLiquid();
+
                     Thread.Sleep(2000);
 
-                    if (newCapacity == 0)
+                    var liquidToAdd = rnd.Next(1, 20);
+
+                    if (canAdd)
                     {
-                        log.Info("I did not need to fill the container");
+                        log.Info($"Generated amount to add: {liquidToAdd}");
+                        var addedLiquid = service.AddLiquid(liquidToAdd);
+                        log.Info($"Amount of liquid added: {addedLiquid}");
+                        log.Info("\n");
                     }
                     else
                     {
-                        log.Info($"I filled the container, new capacity is {newCapacity}");
+                        log.Info("I cannot add any more liquid");
+                        log.Info("\n");
                     }
                     log.Info("---");
 

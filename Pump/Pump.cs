@@ -76,23 +76,31 @@ class Client
                 {
                     var structure = new WaterContainer();
                     var filledStructure = service.GetBounds(structure);
-                    log.Info($"Upper bound - {filledStructure.UpperBound}\nLower bound - {filledStructure.LowerBound}");
-                    var newCapacity = service.SubtractLiquid();
+                    log.Info($"Upper bound - {filledStructure.UpperBound}");
+                    log.Info($"Lower bound - {filledStructure.LowerBound}");
+                    var canPump = service.CanSubtractLiquid();
 
                     // paklausia ar gali nupilti
-                    // jeigu gali nupilti, tai nupila sugeneruota kieki, taciau jeigu sugeneruotas kiekis yra didesnis
+                    // jeigu gali nupilti, tai nupila sugeneruota kieki, 
+                    // taciau jeigu sugeneruotas kiekis yra didesnis
                     // tai nupila tiek kiek gali, o likusi kieki išlog'ina: 
                     // "Sugeneruotas kiekis - 15L, užpiltas kiekis - 10L, riba viršyta - 5L"
 
                     Thread.Sleep(2000);
 
-                    if (newCapacity == 0)
+                    var liquidToPump = rnd.Next(1, 20);
+
+                    if (canPump)
                     {
-                        log.Info("I did not need to pump out the liquid");
+                        log.Info($"Generated amount to pump out: {liquidToPump}");
+                        var pumpedLiquid = service.SubtractLiquid(liquidToPump);
+                        log.Info($"Amount of liquid pumped out: {pumpedLiquid}");
+                        log.Info("\n");
                     }
                     else
                     {
-                        log.Info($"I pumped out the liquid, new capacity is {newCapacity}");
+                        log.Info("I cannot pump out the liquid");
+                        log.Info("\n");
                     }
                     log.Info("---");
 

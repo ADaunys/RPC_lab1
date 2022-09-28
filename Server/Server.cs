@@ -67,7 +67,7 @@ public class Server
         while (true)
         {
             lowerBound = new Random().Next(0, 50);
-            upperBound = new Random().Next(lowerBound, 100);
+            upperBound = new Random().Next(lowerBound + 1, 100);
             log.Info("Bounds changed to: " + lowerBound + " " + upperBound);
             Thread.Sleep(4000);
         }

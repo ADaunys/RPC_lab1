@@ -7,22 +7,6 @@
 public class WaterContainer
 {
     /// <summary>
-    /// Left number.
-    /// </summary>
-    public int Left { get; set; }
-
-    /// <summary>
-    /// Right number.
-    /// </summary>
-    /// <value></value>
-    public int Right { get; set; }
-
-    /// <summary>
-    /// Left + Right
-    /// </summary>
-    public int Sum { get; set; }
-
-    /// <summary>
     /// Capacity
     /// </summary>
     public int Capacity { get; set; }

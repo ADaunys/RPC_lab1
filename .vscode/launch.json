@@ -37,5 +37,11 @@
       "console": "externalTerminal",
       "stopAtEntry": false
     }
+  ],
+  "compounds": [
+    {
+      "name": "All",
+      "configurations": ["Server", "Pump", "Fill"]
+    }
   ]
 }

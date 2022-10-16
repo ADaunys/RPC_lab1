@@ -80,12 +80,6 @@ class Client
                     log.Info($"Lower bound - {filledStructure.LowerBound}");
                     var canPump = service.CanSubtractLiquid();
 
-                    // paklausia ar gali nupilti
-                    // jeigu gali nupilti, tai nupila sugeneruota kieki, 
-                    // taciau jeigu sugeneruotas kiekis yra didesnis
-                    // tai nupila tiek kiek gali, o likusi kieki išlog'ina: 
-                    // "Sugeneruotas kiekis - 15L, užpiltas kiekis - 10L, riba viršyta - 5L"
-
                     Thread.Sleep(2000);
 
                     var liquidToPump = rnd.Next(1, 20);
